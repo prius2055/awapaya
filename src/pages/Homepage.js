@@ -226,8 +226,9 @@ const Homepage = () => {
           <div className="hero-text">
             <h1>WELCOME TO Awapaya</h1>
             <p>
-              Awapaya is a Telecommunication company. At Awapaya, we offer best deals when it comes to internet Data Plans,
-              Airtime, Bills payment like GOTV, DSTV & STARTIMES.
+              Awapaya is a Telecommunication company. At Awapaya, we offer best
+              deals when it comes to internet Data Plans, Airtime, Bills payment
+              like GOTV, DSTV & STARTIMES.
             </p>
             <div className="hero-buttons">
               <Link to="/login" className="btn btn-outline">
@@ -249,18 +250,18 @@ const Homepage = () => {
           <div className="title-underline small"></div>
         </div>
         <p className="section-description">
-          Awapaya is a registered telecommunication vendor known for
-          providing internet services, airtime VTU, cable TV subscriptions,
-          electricity payment.
+          Awapaya is a registered telecommunication vendor known for providing
+          internet services, airtime VTU, cable TV subscriptions, electricity
+          payment.
         </p>
         <div className="container about-grid">
           <div className="about-content">
             <h3>RELIABLE TELECOMMUNICATION COMPANY</h3>
             <div className="content-underline"></div>
             <p>
-              Awapaya also gives people the opportunity of becoming
-              their reseller and be making money on hourly and daily basis so as
-              to boost their financial status.
+              Awapaya also gives people the opportunity of becoming their
+              reseller and be making money on hourly and daily basis so as to
+              boost their financial status.
             </p>
             <p>
               We offer instant recharge of Airtime, Databundle, CableTV (DStv,
@@ -584,10 +585,9 @@ const Homepage = () => {
           <div className="title-underline big"></div>
           <div className="title-underline small"></div>
           <p>
-            Download Awapaya Android app, compatible with all devices.
-            Search for Awapaya on playstore or click on the button
-            below to download the app on Playstore. Will soon be available on
-            App Store.
+            Download Awapaya Android app, compatible with all devices. Search
+            for Awapaya on playstore or click on the button below to download
+            the app on Playstore. Will soon be available on App Store.
           </p>
           <button className="download-btn">available on PLAY STORE</button>
         </div>
@@ -607,7 +607,7 @@ const Homepage = () => {
           <div className="contact-card">
             <div className="contact-icon">📍</div>
             <h3>Office Address:</h3>
-            <p>No 65 Oronna Street Madakeke, Ife, Osun state</p>
+            <p>3 Kumasi Crescent, Wuse 2, Abuja, FCT</p>
           </div>
           <div className="contact-card">
             <div className="contact-icon">✉️</div>
@@ -617,7 +617,7 @@ const Homepage = () => {
           <div className="contact-card">
             <div className="contact-icon">📞</div>
             <h3>Phone Number:</h3>
-            <p>Call: +234 (0)706 544 2300</p>
+            <p>Call: +234 (0)813 843 2055</p>
           </div>
         </div>
       </section>
@@ -628,9 +628,9 @@ const Homepage = () => {
           <div className="footer-section">
             <h3>Awapaya</h3>
             <p>
-              Awapaya is a company of Awapaya Nigeria Limited.
-              We offer best deals when it comes to internet Data Plans, Airtime,
-              Bills payment like GOTV, DSTV & STARTIMES.
+              Awapaya is a company of Awapaya Nigeria Limited. We offer best
+              deals when it comes to internet Data Plans, Airtime, Bills payment
+              like GOTV, DSTV & STARTIMES.
             </p>
           </div>
           <div className="footer-section">
@@ -661,9 +661,7 @@ const Homepage = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>
-            Awapaya by Prius2055 Copyright © 2026 All Rights Reserved
-          </p>
+          <p>Awapaya by Prius2055 Copyright © 2026 All Rights Reserved</p>
         </div>
       </footer>
     </div>

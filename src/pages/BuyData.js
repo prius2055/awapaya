@@ -1,9 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useWallet } from "../context/walletContext";
+import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import Header from "../components/Header";
-import { Eye, EyeOff } from "lucide-react";
+// import { Eye, EyeOff } from "lucide-react";
+
 import "./BuyData.css";
 
 const BuyData = () => {
@@ -14,6 +16,8 @@ const BuyData = () => {
     loading: walletLoading,
     fetchDataPlans,
   } = useWallet();
+
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchDataPlans();
@@ -26,13 +30,13 @@ const BuyData = () => {
     dataType: "",
     dataPlan: "",
     mobileNumber: "",
-    transactionPin: "",
+    // transactionPin: "",
     bypassValidator: false,
   });
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [showPin, setShowPin] = useState(false);
+  // const [showPin, setShowPin] = useState(false);
 
   /* -----------------------------
      DERIVED DATA (SAFE)
@@ -113,19 +117,19 @@ const BuyData = () => {
       return;
     }
 
-    if (!formData.transactionPin) {
-      setError(
-        "Please enter your transaction pin. If you don't have a pin, Kindly set one before continuing with the transaction",
-      );
-      return;
-    }
+    // if (!formData.transactionPin) {
+    //   setError(
+    //     "Please enter your transaction pin. If you don't have a pin, Kindly set one before continuing with the transaction",
+    //   );
+    //   return;
+    // }
 
     const payload = {
       network: Number(selectedPlan.providerNetworkId),
       plan: Number(selectedPlan.providerPlanId),
       mobile_number: formData.mobileNumber,
       amount: selectedPlan.sellingPrice,
-      pin: formData.transactionPin,
+      // pin: formData.transactionPin,
       Ported_number: true,
     };
 
@@ -246,8 +250,13 @@ const BuyData = () => {
                         key={plan.providerPlanId}
                         value={plan.providerPlanId}
                       >
-                        {plan.planName} - ₦{plan.sellingPrice} ({plan.validity})
-                        {plan.planType}
+                        {plan.planName} - ₦
+                        {user.role === "reseller"
+                          ? plan.resellerPrice
+                          : user.role === "marketer"
+                            ? plan.providerPrice
+                            : plan.sellingPrice}
+                        ({plan.validity}){plan.planType}
                       </option>
                     ))}
                   </select>
@@ -274,11 +283,20 @@ const BuyData = () => {
                 {/* AMOUNT */}
                 <div className="form-group">
                   <label>Amount (₦)</label>
-                  <input readOnly value={selectedPlan?.sellingPrice || ""} />
+                  <input
+                    readOnly
+                    value={
+                      user.role === "reseller"
+                        ? selectedPlan?.resellerPrice
+                        : user.role === "marketer"
+                          ? selectedPlan?.providerPrice
+                          : selectedPlan?.sellingPrice || ""
+                    }
+                  />
                 </div>
 
                 {/* TRANSACTION PIN */}
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label>Transaction Pin *</label>
                   <input
                     type={showPin ? "text" : "password"}
@@ -297,7 +315,7 @@ const BuyData = () => {
                   >
                     {showPin ? <Eye /> : <EyeOff />}
                   </button>
-                </div>
+                </div> */}
                 <button
                   type="submit"
                   disabled={!selectedPlan || submitting}
@@ -305,7 +323,7 @@ const BuyData = () => {
                 >
                   {submitting
                     ? "Processing..."
-                    : `Buy Now ₦${selectedPlan?.sellingPrice || 0}`}
+                    : `Buy Now ₦${user.role === "reseller" ? selectedPlan?.resellerPrice : user.role === "marketer" ? selectedPlan?.providerPrice : selectedPlan?.sellingPrice || 0}`}
                 </button>
               </div>
 
