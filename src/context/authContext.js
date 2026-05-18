@@ -94,6 +94,8 @@ export const AuthProvider = ({ children }) => {
     try {
       // console.log("🔵 Logging in...");
 
+      console.log(BASE_URL);
+
       const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: getHeaders(false),
