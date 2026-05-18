@@ -171,10 +171,10 @@ const Homepage = () => {
 
           {/* Desktop Buttons */}
           <div className="nav-buttons desktop-only">
-            <Link to="/login" className="btn btn-outline">
+            <Link to="/login" className="btn btn-outline login-btn">
               LOGIN
             </Link>
-            <Link to="/signup" className="btn btn-primary">
+            <Link to="/signup" className="btn btn-primary sign-up-btn">
               REGISTER
             </Link>
           </div>
@@ -203,14 +203,14 @@ const Homepage = () => {
             <div className="mobile-nav-buttons">
               <Link
                 to="/login"
-                className="btn btn-outline"
+                className="btn btn-outline login-btn"
                 onClick={closeMobileMenu}
               >
                 LOGIN
               </Link>
               <Link
                 to="/signup"
-                className="btn btn-primary"
+                className="btn btn-primary sign-up-btn"
                 onClick={closeMobileMenu}
               >
                 REGISTER
@@ -231,10 +231,10 @@ const Homepage = () => {
               like GOTV, DSTV & STARTIMES.
             </p>
             <div className="hero-buttons">
-              <Link to="/login" className="btn btn-outline">
+              <Link to="/login" className="btn btn-outline login-btn">
                 LOGIN
               </Link>
-              <Link to="/signup" className="btn btn-primary">
+              <Link to="/signup" className="btn btn-primary sign-up-btn">
                 REGISTER
               </Link>
             </div>
@@ -661,7 +661,7 @@ const Homepage = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>Awapaya by Prius2055 Copyright © 2026 All Rights Reserved</p>
+          <p>Awapaya by Prifacon Copyright © 2026 All Rights Reserved</p>
         </div>
       </footer>
     </div>
