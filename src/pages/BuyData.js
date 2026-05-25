@@ -15,13 +15,15 @@ const BuyData = () => {
     buyData,
     loading: walletLoading,
     fetchDataPlans,
+    refreshWallet,
   } = useWallet();
 
   const { user } = useAuth();
 
   useEffect(() => {
     fetchDataPlans();
-  }, [fetchDataPlans]);
+    refreshWallet();
+  }, [fetchDataPlans, refreshWallet]);
 
   // console.log("data plans for buy data", dataPlans);
 
