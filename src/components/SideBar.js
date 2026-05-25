@@ -22,7 +22,7 @@ import "./../pages/Dashboard.css";
 
 const SideBar = ({ marketerWalletBalance }) => {
   const { user, logout } = useAuth();
-  const { balance: userWalletBalance } = useWallet();
+  const { balance: userWalletBalance, marketerBalance } = useWallet();
   const { mobileMenu, toggleMobileMenu } = useMenu();
 
   const navigate = useNavigate();
@@ -30,7 +30,9 @@ const SideBar = ({ marketerWalletBalance }) => {
   const displayedBalance =
     marketerWalletBalance !== undefined
       ? marketerWalletBalance
-      : userWalletBalance;
+      : user?.role === "marketer"
+        ? marketerBalance
+        : userWalletBalance;
 
   const closeMobileMenu = () => {
     if (mobileMenu) toggleMobileMenu();

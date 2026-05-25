@@ -19,6 +19,8 @@ export const WalletProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [marketerBalance, setMarketerBalance] = useState(null);
+
   /* ── NEW: virtual accounts from PaymentPoint ── */
   const [virtualAccounts, setVirtualAccounts] = useState([]);
   const [accountsLoading, setAccountsLoading] = useState(false);
@@ -38,10 +40,10 @@ export const WalletProvider = ({ children }) => {
    * ───────────────────────────────────────────────────────── */
   const refreshWallet = useCallback(async () => {
     try {
+      // Always fetch user wallet
       const response = await fetch(`${BASE_URL}/wallet/get`, {
         headers: getHeaders(),
       });
-
       const data = await response.json();
 
       if (data.status === "success") {
@@ -50,9 +52,21 @@ export const WalletProvider = ({ children }) => {
         setTotalFunded(wallet.totalFunded);
         setTotalSpent(wallet.totalSpent);
 
-        // ✅ Restore virtual accounts if they already exist on the wallet
         if (wallet.virtualAccounts?.length > 0) {
           setVirtualAccounts(wallet.virtualAccounts);
+        }
+      }
+
+      // Also fetch marketer balance if user is a marketer
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (user.role === "marketer") {
+        const marketerRes = await fetch(`${BASE_URL}/marketer/dashboard`, {
+          headers: getHeaders(),
+        });
+        const marketerData = await marketerRes.json();
+
+        if (marketerData.status === "success") {
+          setMarketerBalance(marketerData.data.stats.totalBalance);
         }
       }
     } catch (error) {
@@ -425,6 +439,7 @@ export const WalletProvider = ({ children }) => {
         cableRecharge,
         upgradeToReseller,
         setPin,
+        marketerBalance,
       }}
     >
       {children}
