@@ -71,8 +71,6 @@ const MarketerDashboard = () => {
 
   const { balance, fundWallet, virtualAccounts, refreshWallet } = useWallet();
 
-  console.log("balance:", balance);
-
   const fmt = (n) =>
     new Intl.NumberFormat("en-NG", {
       style: "currency",
@@ -88,8 +86,6 @@ const MarketerDashboard = () => {
           headers: getHeaders(),
         });
         const result = await response.json();
-
-        console.log("Dashboard data fetched:", result);
 
         if (result.status === "success") {
           setStats(result.data.stats);

@@ -7,6 +7,7 @@ import {
   useEffect,
 } from "react";
 import { BASE_URL, getHeaders } from "../api/api";
+import { useAuth } from "./authContext";
 
 const WalletContext = createContext();
 
@@ -35,6 +36,10 @@ export const WalletProvider = ({ children }) => {
     [],
   );
 
+  const { user } = useAuth();
+
+  const role = user?.role;
+
   /* ─────────────────────────────────────────────────────────
    * REFRESH WALLET
    * ───────────────────────────────────────────────────────── */
@@ -58,8 +63,7 @@ export const WalletProvider = ({ children }) => {
       }
 
       // Also fetch marketer balance if user is a marketer
-      const user = JSON.parse(localStorage.getItem("user") || "{}");
-      if (user.role === "marketer") {
+      if (role === "marketer") {
         const marketerRes = await fetch(`${BASE_URL}/marketer/dashboard`, {
           headers: getHeaders(),
         });
@@ -74,7 +78,7 @@ export const WalletProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [role]);
 
   /* ─────────────────────────────────────────────────────────
    * FUND WALLET — PaymentPoint virtual account
