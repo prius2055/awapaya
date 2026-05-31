@@ -535,9 +535,18 @@ const Homepage = () => {
             </table>
           ))}
         </div>
-        <Link to="/login" className="btn btn-primary">
-          PURCHASE
-        </Link>
+        <div className="pricing-action-buttons">
+          <button
+            onClick={() => window.print()}
+            className="print-button btn btn-primary btn_print"
+          >
+            🖨️ Print / Save as PDF
+          </button>
+
+          <Link to="/login" className="btn btn-primary btn_purchase">
+            PURCHASE
+          </Link>
+        </div>
       </section>
 
       {/* FAQs */}
