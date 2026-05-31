@@ -145,8 +145,6 @@ const Homepage = () => {
 
   const { dataPlans, fetchDataPlans } = useWallet();
 
-  console.log("Current data plans in context:", dataPlans);
-
   useEffect(() => {
     fetchDataPlans();
   }, [fetchDataPlans]);
@@ -521,7 +519,7 @@ const Homepage = () => {
                 </tr>
                 <tr>
                   <th>Data Plan</th>
-                  <th>Price (₦)</th>
+                  <th>Prices</th>
                 </tr>
               </thead>
               <tbody>
@@ -530,7 +528,7 @@ const Homepage = () => {
                     <td>
                       {plan.planName} - {plan.validity}
                     </td>
-                    <td>{plan.sellingPrice}</td>
+                    <td>₦{plan.sellingPrice}</td>
                   </tr>
                 ))}
               </tbody>
