@@ -4,21 +4,9 @@
   box-sizing: border-box;
 }
 
-/*
-  ══════════════════════════════════════════════
-  AWAPAYA COLOR SYSTEM
-  ── Deep navy   #0B1F3A  (primary dark)
-  ── Electric    #0066FF  (primary accent)
-  ── Sky         #00C2FF  (secondary accent)
-  ── racing-red       #FF8C00  (CTA / highlight)
-  ── Off-white   #F0F4FF  (background)
-  ── Text dark   #0B1F3A
-  ── Text mid    #4A6080
-  ══════════════════════════════════════════════
-*/
-
 :root {
-  --navy: #fe6e07;
+  /* --navy: #fe6e07; */
+  --navy: #0a1570;
   --deep-green: #1f914b;
   --electric: #1f914b;
   --electric-lt: #1f914b;
@@ -166,7 +154,7 @@
   display: none;
   position: relative;
   z-index: 1000;
-  color: white;
+  color: var(--navy);
   background: none;
   border: none;
   font-size: 2rem;
@@ -1128,6 +1116,14 @@ section {
     display: block;
   }
 
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-container {
+    padding: 10rem 5rem;
+  }
+
   .mobile-menu {
     display: flex;
     position: fixed;
@@ -1160,34 +1156,34 @@ section {
     backdrop-filter: blur(4px);
   }
 
-  .mobile-menu-content {
+  .homepage-mobile-menu-content {
     position: absolute;
     top: 0;
     right: 0;
-    width: 280px;
+    width: 60%;
     height: 100%;
-    background: var(--navy);
+    background: var(--off-white);
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
     padding: 80px 2rem 2rem;
     transform: translateX(100%);
     transition: transform 0.3s ease;
     overflow-y: auto;
   }
-  .mobile-menu.open .mobile-menu-content {
+  .mobile-menu.open .homepage-mobile-menu-content {
     transform: translateX(0);
   }
 
-  .mobile-nav-links {
+  .homepage-mobile-nav-links {
     list-style: none;
     padding: 0;
     margin: 0 0 2rem 0;
   }
-  .mobile-nav-links li {
+  .homepage-mobile-nav-links li {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #0a1570;
   }
-  .mobile-nav-links p {
-    color: white;
+  .homepage-mobile-nav-links p {
+    color: var(--text-dark);
     padding: 1rem 0;
     font-weight: 500;
     font-size: 1.0625rem;
@@ -1196,11 +1192,11 @@ section {
     display: block;
     position: relative;
   }
-  .mobile-nav-links p:hover {
+  .homepage-mobile-nav-links p:hover {
     color: var(--electric-lt);
     padding-left: 0.5rem;
   }
-  .mobile-nav-links p::before {
+  .homepage-mobile-nav-links p::before {
     content: "";
     position: absolute;
     left: 0;
@@ -1211,7 +1207,7 @@ section {
     background: var(--electric-lt);
     transition: width 0.3s;
   }
-  .mobile-nav-links p:hover::before {
+  .homepage-mobile-nav-links p:hover::before {
     width: 20px;
   }
 

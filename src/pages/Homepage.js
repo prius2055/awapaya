@@ -190,8 +190,8 @@ const Homepage = () => {
         {/* Mobile Menu */}
         <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
           <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>
-          <div className="mobile-menu-content">
-            <ul className="mobile-nav-links">
+          <div className="homepage-mobile-menu-content">
+            <ul className="homepage-mobile-nav-links">
               {navLinks.map((link) => (
                 <li key={link}>
                   <p onClick={() => scrollToSection(link)}>{link}</p>
