@@ -8,8 +8,8 @@
 .service {
   display: flex;
   flex-direction: column;
-  margin-left: 280px;
-  width: calc(100% - 280px);
+  /* margin-left: 280px; */
+  width: 100%;
 }
 
 /* Header */
