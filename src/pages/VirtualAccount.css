@@ -28,7 +28,8 @@
 
 /* Fund Wallet Card */
 .fund-wallet-card {
-  background: rgba(10, 21, 112, 0.85);
+  /* background: rgba(10, 21, 112, 0.85); */
+  background: #1f914b;
   border-radius: 16px;
   padding: 30px;
   margin-bottom: 30px;
@@ -52,7 +53,7 @@
 }
 
 .alert-success {
-  background: #f8a01c;
+  background: #d4850e;
   color: #0a1570;
   border: 1px solid #fff;
 }

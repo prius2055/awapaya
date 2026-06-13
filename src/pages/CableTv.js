@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SideBar from "../components/SideBar";
 import Header from "../components/Header";
 import { useWallet } from "../context/walletContext";
-import { Eye, EyeOff } from "lucide-react";
+// import { Eye, EyeOff } from "lucide-react";
 
 import "./BuyData.css";
 
@@ -24,14 +24,14 @@ const CableTv = () => {
     customerPhone: "",
     amount: "",
     customerName: "",
-    transactionPin: "",
+    // transactionPin: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [showPin, setShowPin] = useState(false);
+  // const [showPin, setShowPin] = useState(false);
 
-  const { cableValidation, cableRecharge } = useWallet();
+  const { cablePlans, cableValidation, cableRecharge } = useWallet();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,6 +79,8 @@ const CableTv = () => {
     setLoading(true);
 
     const result = await cableValidation(payload);
+
+    console.log(result);
 
     if (result.status) {
       setLoading(false);
@@ -135,7 +137,7 @@ const CableTv = () => {
         customerPhone: "",
         amount: "",
         customerName: "",
-        transactionPin: "",
+        // transactionPin: "",
       });
     } else {
       return;
@@ -172,7 +174,7 @@ const CableTv = () => {
                       <option value="">-- Select Cable Name --</option>
                       <option value="GOTV">GOTV</option>
                       <option value="DSTV">DSTV</option>
-                      <option value="STARTIMES">STARTIMES</option>
+                      <option value="STARTIME">STARTIMES</option>
                     </select>
                   </div>
 
@@ -207,15 +209,17 @@ const CableTv = () => {
                       required
                     >
                       <option value="">-- Select Cable Plan --</option>
-                      <option value="34">GOtv Smallie - Monthly = N1900</option>
-                      <option value="16">GOtv Jinja = N3900</option>
-                      <option value="35">
-                        GOtv Smallie - Quarterly = N5100
-                      </option>
-                      <option value="17">GOtv Jolli = N5800</option>
-                      <option value="2">GOtv Max = N8500</option>
-                      <option value="47">Gotv-supa monthly = N11400</option>
-                      <option value="36">GOtv Smallie - Yearly = N15000</option>
+                      {cablePlans
+                        .filter(
+                          (plan) =>
+                            plan.cableNetwork?.toLowerCase() ===
+                            formData.cableName?.toLowerCase(),
+                        )
+                        .map((plan) => (
+                          <option key={plan.id} value={plan.id}>
+                            {plan.cablePackage} - {plan.cablePrice}
+                          </option>
+                        ))}
                     </select>
                     <small className="form-hint">Select Cable Plan</small>
                   </div>
@@ -254,7 +258,7 @@ const CableTv = () => {
                   </div>
 
                   {/* TRANSACTION PIN */}
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label>Transaction Pin *</label>
                     <input
                       type={showPin ? "text" : "password"}
@@ -273,7 +277,7 @@ const CableTv = () => {
                     >
                       {showPin ? <Eye /> : <EyeOff />}
                     </button>
-                  </div>
+                  </div> */}
 
                   {/* Submit Button */}
 

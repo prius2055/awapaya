@@ -17,6 +17,7 @@ export const WalletProvider = ({ children }) => {
   const [totalSpent, setTotalSpent] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [dataPlans, setDataPlans] = useState([]);
+  const [cablePlans, setCablePlans] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -79,6 +80,38 @@ export const WalletProvider = ({ children }) => {
       setLoading(false);
     }
   }, [role]);
+
+  /* ─────────────────────────────────────────────────────────
+   * SYNC API RESULT
+   * ───────────────────────────────────────────────────────── */
+  const syncApiResult = useCallback(async () => {
+    try {
+      // Always fetch user wallet
+      const response = await fetch(`${BASE_URL}/vtu/result`, {
+        headers: getHeaders(false),
+      });
+      const data = await response.json();
+
+      if (data.status === "success") {
+        console.log("API result synced:", data.data.Cableplan);
+        const cablePlans = Object.values(data.data.Cableplan)
+          .flat()
+          .map((p) => ({
+            providerCablePlanId: String(p.id),
+            cableNetwork: p.cable,
+            cablePackage: p.package,
+            cablePrice: Number(p.plan_amount),
+            syncedAt: new Date(),
+          }));
+
+        setCablePlans(cablePlans);
+      }
+    } catch (error) {
+      console.error("syncApiResult error:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   /* ─────────────────────────────────────────────────────────
    * FUND WALLET — PaymentPoint virtual account
@@ -411,7 +444,8 @@ export const WalletProvider = ({ children }) => {
 
   useEffect(() => {
     refreshWallet();
-  }, [refreshWallet]);
+    syncApiResult();
+  }, [refreshWallet, syncApiResult]);
 
   return (
     <WalletContext.Provider
@@ -431,10 +465,11 @@ export const WalletProvider = ({ children }) => {
         /* ── Actions ── */
         refreshWallet,
         fundWallet,
-
+        syncApiResult,
         verifyWalletFunding,
         fetchDataPlans,
         dataPlans,
+        cablePlans,
         buyData,
         buyAirtime,
         meterValidation,
